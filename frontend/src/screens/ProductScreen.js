@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import {  Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
@@ -9,8 +9,9 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook to access the navigation object
   const { id } = useParams();
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -20,10 +21,13 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id));
   }, [dispatch, id]);
 
+  const addToCartHandler = () => {
+    navigate(`/cart/${id}?qty=${qty}`);
+  };
   return (
     <>
       <Link className="btn my-3" to="/">
-        <i class="fa-solid fa-arrow-left"></i> Go Back
+        <i className="fa-solid fa-arrow-left"></i> Go Back
       </Link>
 
       {loading ? (
@@ -83,7 +87,7 @@ const ProductScreen = () => {
                           onChange={(e) => setQty(e.target.value)}
                         >
                           {[...Array(product.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x+1}>
+                            <option key={x + 1} value={x + 1}>
                               {x + 1}
                             </option>
                           ))}
@@ -94,7 +98,11 @@ const ProductScreen = () => {
                 )}
 
                 <ListGroup.Item>
-                  <Button type="button" disabled={product.countInStock === 0}>
+                  <Button
+                    onClick={addToCartHandler}
+                    type="button"
+                    disabled={product.countInStock === 0}
+                  >
                     Add To Cart
                   </Button>
                 </ListGroup.Item>
@@ -108,3 +116,4 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
+// export default withRouter(ProductScreen);
