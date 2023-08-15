@@ -12,7 +12,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
@@ -20,10 +20,10 @@ const LoginScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     dispatch(login(email, password)).then(() => {
-      // Check if login was successful and navigate
-      if (userInfo) {
-        navigate("/"); // Replace "/" with the desired route
-      }
+      navigate("/")
+      // if (userInfo) {
+      //   navigate("/"); 
+      // }
     });
   };
 
