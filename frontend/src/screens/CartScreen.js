@@ -15,7 +15,7 @@ import { addToCart,removeFromCart } from "../actions/cartActions";
 import { Link } from "react-router-dom";
 
 const CartScreen = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
   const productId = id;
 
@@ -37,8 +37,15 @@ const CartScreen = () => {
     dispatch(removeFromCart(id))
   };
 
+const userLogin = useSelector((state) => state.userLogin);
+const { userInfo } = userLogin;
+
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
+    if(userInfo){
+      navigate("/shipping");
+    }else{
+      navigate('/login');
+    }
   };
 
   return (
