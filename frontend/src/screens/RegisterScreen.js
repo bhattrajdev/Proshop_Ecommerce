@@ -29,7 +29,7 @@ const navigate = useNavigate()
      const response =  dispatch(register(name, email, password));
     //  if(response)
     //  navigate('/')
-
+ 
     }
   };
 
