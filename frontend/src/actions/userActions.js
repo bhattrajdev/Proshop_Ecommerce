@@ -13,7 +13,9 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
+  USER_DETAILS_RESET,
 } from "../constants/userConstants";
+import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 import { useNavigate } from "react-router-dom";
 
 // Action for user login
@@ -45,7 +47,7 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
 
-    return true
+    return true;
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -54,7 +56,7 @@ export const login = (email, password) => async (dispatch) => {
           ? error.response.data.message
           : error.message,
     });
-    return false
+    return false;
   }
 };
 
@@ -62,6 +64,8 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_MY_RESET });
 };
 
 // Action for user registration
@@ -99,8 +103,6 @@ export const register = (name, email, password) => async (dispatch) => {
     });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-
-  
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -163,7 +165,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/api/users/profile`,user, config);
+    const { data } = await axios.put(`/api/users/profile`, user, config);
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
