@@ -12,6 +12,7 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./components/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import UserListScreen from "./screens/UserListScreen";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="*" element="Page not found" />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/:id?" element={<CartScreen />} />
+            <Route path="/admin/userlist" element={<UserListScreen />} />
           </Routes>
         </Container>
       </main>
