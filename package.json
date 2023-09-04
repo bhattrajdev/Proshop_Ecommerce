@@ -9,8 +9,7 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-"test":  "npm run server & npm run client",
-
+    "test": "npm run server & npm run client",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d"
   },
@@ -24,6 +23,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.1",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1",
     "react-router-dom": "^6.15.0"
   },
