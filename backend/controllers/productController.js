@@ -18,7 +18,6 @@ const getProductById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Product not found");
   }
-  res.json(product);
 });
 
 // to delete product
@@ -68,11 +67,12 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.countInStock = countInStock;
 
     const updatedProduct = await product.save();
-    res.json(201).json(updateProduct);
+    res.status(201).json(updatedProduct); // Use 'updatedProduct' here, not 'updateProduct'
   } else {
     res.status(404);
     throw new Error("Product Not Found");
   }
 });
+
 
 export { getProducts, getProductById, deleteProduct,createProduct,updateProduct };

@@ -71,7 +71,7 @@ const { userInfo } = userLogin;
                   <Col md={2}>
                     <Form.Control
                       as="select"
-                      value={item.qty} // Use item.qty instead of qty
+                      value={item.qty} 
                       onChange={(e) =>
                         dispatch(
                           addToCart(item.product, Number(e.target.value))

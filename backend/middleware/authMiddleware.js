@@ -11,20 +11,19 @@ const protect = asyncHandler(async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      console.log(`Received token: ${token}`)
+      // console.log(`Received token: ${token}`)
    
 
       // Verify the token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      console.log(`Decoded data:`, decoded);
+      // console.log(`Decoded data:`, decoded);
 
       // Retrieve the user based on the decoded ID
       req.user = await User.findById(decoded.id).select("-password");
 
-      console.log(`User found:`, req.user);
+      // console.log(`User found:`, req.user);
 
-      // If everything is successful, proceed to the next middleware or route
       next();
     } catch (error) {
       console.error("JWT Verification Error:", error);

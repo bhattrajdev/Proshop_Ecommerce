@@ -92,15 +92,15 @@ const uploadFileHandler = async (e) => {
     };
     const { data } = await axios.post("/api/uploads", formData, config);
 
-    setImage(data); // Update the image state with the uploaded file path
+    // Update the image URL input field with the selected file name or URL
+    setImage(data);
     setUploading(false);
   } catch (error) {
     console.error(error);
     setUploading(false);
   }
 };
-
-
+ 
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -160,7 +160,7 @@ const uploadFileHandler = async (e) => {
                 type="text"
                 placeholder="Enter Image Url"
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(e) => setImage(e.target.value)} // Update the image URL input field
               />
               <Form.Control
                 id="image"
